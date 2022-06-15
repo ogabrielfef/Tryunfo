@@ -15,13 +15,13 @@ class Form extends Component {
   //   isSaveButtonDisabled: 'false',
   // };
 
-  onInputChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  // onInputChange = (event) => {
+  //   this.setState({ [event.target.name]: event.target.value });
+  // };
 
-  onSaveButtonClick = () => {
+  // onSaveButtonClick = () => {
 
-  }
+  // }
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
@@ -152,7 +152,7 @@ Form.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  hasTrunfo: PropTypes.bool.isRequired,
+  // hasTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
