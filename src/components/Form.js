@@ -2,27 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends Component {
-  // state = {
-  //   cardName: '',
-  //   cardDescription: '',
-  //   cardAttr1: '',
-  //   cardAttr2: '',
-  //   cardAttr3: '',
-  //   cardImage: '',
-  //   cardRare: '',
-  //   cardTrunfo: 'false',
-  //   // hasTrunfo: 'false',
-  //   isSaveButtonDisabled: 'false',
-  // };
-
-  // onInputChange = (event) => {
-  //   this.setState({ [event.target.name]: event.target.value });
-  // };
-
-  // onSaveButtonClick = () => {
-
-  // }
-
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo,
@@ -35,7 +14,7 @@ class Form extends Component {
           Nome da carta:
           <input
             id="name"
-            name="nome"
+            name="cardName"
             type="text"
             data-testid="name-input"
             value={ cardName }
@@ -47,7 +26,7 @@ class Form extends Component {
           Descrição:
           <textarea
             id="descrição"
-            name="descrição"
+            name="cardDescription"
             data-testid="description-input"
             value={ cardDescription }
             onChange={ onInputChange }
@@ -58,7 +37,7 @@ class Form extends Component {
           Força:
           <input
             id="atributo1"
-            name="atributo1"
+            name="cardAttr1"
             type="number"
             data-testid="attr1-input"
             value={ cardAttr1 }
@@ -70,7 +49,7 @@ class Form extends Component {
           Inteligência:
           <input
             id="atributo2"
-            name="atributo2"
+            name="cardAttr2"
             type="number"
             data-testid="attr2-input"
             value={ cardAttr2 }
@@ -82,7 +61,7 @@ class Form extends Component {
           Velocidade:
           <input
             id="atributo3"
-            name="atributo3"
+            name="cardAttr3"
             type="number"
             data-testid="attr3-input"
             value={ cardAttr3 }
@@ -94,7 +73,7 @@ class Form extends Component {
           Insira o local da imagem:
           <input
             id="imagem"
-            name="imagem "
+            name="cardImage"
             type="text"
             data-testid="image-input"
             value={ cardImage }
@@ -106,7 +85,7 @@ class Form extends Component {
           Raridade:
           <select
             id="tipo"
-            name="tipo"
+            name="cardRare"
             data-testid="rare-input"
             value={ cardRare }
             onChange={ onInputChange }
@@ -122,7 +101,7 @@ class Form extends Component {
           <input
             type="checkbox"
             id="superTrunfo"
-            name="superTrunfo"
+            name="cardTrunfo"
             data-testid="trunfo-input"
             checked={ cardTrunfo }
             onChange={ onInputChange }
@@ -130,7 +109,7 @@ class Form extends Component {
         </label>
         <br />
         <button
-          type="submit"
+          type="button"
           data-testid="save-button"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
