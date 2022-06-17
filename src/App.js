@@ -18,6 +18,7 @@ class App extends React.Component {
     cardList: [],
     filterName: '',
     trunfo: false,
+    rareFilter: 'todas',
   };
 
   onButtonDelete = (cardName) => {
@@ -76,8 +77,8 @@ class App extends React.Component {
 
   handleChangeList = (event) => {
     this.setState({
-      filterName: event.target.value,
-    });
+      [event.target.name]: event.target.value,
+    }); console.log(event.target.value);
   }
 
   buttonSaveValidate() {
@@ -107,7 +108,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { cardList, filterName, trunfoFilter } = this.state;
+    const { cardList, filterName, trunfoFilter, rareFilter } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -132,7 +133,23 @@ class App extends React.Component {
               id="filterName"
             />
           </label>
+          <label htmlFor="rare-filter">
+            <select
+              id="rare-filter"
+              name="rareFilter"
+              data-testid="rare-filter"
+              value={ rareFilter }
+              onChange={ this.handleChangeList }
+            >
+              <option value="todas">todas</option>
+              <option value="normal">normal</option>
+              <option value="raro">raro</option>
+              <option value="muito raro">muito raro</option>
+            </select>
+          </label>
           { cardList
+            .filter((card) => (rareFilter === 'todas'
+              ? cardList : rareFilter === card.cardRare))
             .filter((card) => card.cardName.includes(filterName))
             .map((card) => (
               <CardList
