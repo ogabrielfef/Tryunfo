@@ -14,7 +14,40 @@ class App extends React.Component {
     cardTrunfo: false,
     // // hasTrunfo: 'false',
     isSaveButtonDisabled: true,
+    cardList: [],
   };
+
+  clearInput = () => {
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+    });
+  }
+
+  onSaveButtonClick = () => {
+    const { cardName, cardDescription, cardAttr1,
+      cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo } = this.state;
+    const obj = {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+      cardTrunfo,
+    };
+    if (cardTrunfo) this.setState({ hasTrunfo: true });
+    this.setState((prevState) => ({ cardList: [...prevState.cardList, obj] }),
+      this.clearInput);
+  }
 
   handleChange = (event) => {
     const value = event.target.type === 'checkbox'
@@ -51,32 +84,16 @@ class App extends React.Component {
   }
 
   render() {
-    const { cardName, cardDescription, cardImage, cardAttr1, cardAttr2,
-      cardAttr3, cardRare, cardTrunfo, isSaveButtonDisabled } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
         <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardImage={ cardImage }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
+          { ...this.state }
           onInputChange={ this.handleChange }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardImage={ cardImage }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
+          { ...this.state }
         />
       </div>
     );
