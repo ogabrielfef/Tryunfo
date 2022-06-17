@@ -16,6 +16,8 @@ class App extends React.Component {
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     cardList: [],
+    filterName: '',
+    trunfo: false,
   };
 
   onButtonDelete = (cardName) => {
@@ -72,6 +74,12 @@ class App extends React.Component {
     }, this.buttonSaveValidate);
   }
 
+  handleChangeList = (event) => {
+    this.setState({
+      filterName: event.target.value,
+    });
+  }
+
   buttonSaveValidate() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage, cardRare } = this.state;
@@ -99,7 +107,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { cardList } = this.state;
+    const { cardList, filterName, trunfoFilter } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -112,20 +120,34 @@ class App extends React.Component {
           { ...this.state }
         />
         <section>
-          { cardList.map((card) => (
-            <CardList
-              key={ card.cardName }
-              cardName={ card.cardName }
-              cardDescription={ card.cardDescription }
-              cardAttr1={ card.cardAttr1 }
-              cardAttr2={ card.cardAttr2 }
-              cardAttr3={ card.cardAttr3 }
-              cardImage={ card.cardImage }
-              cardRare={ card.cardRare }
-              cardTrunfo={ card.cardTrunfo }
-              onButtonDelete={ this.onButtonDelete }
+          <label htmlFor="name-filter">
+            Filtro de Busca
+            <input
+              name="filterName"
+              onChange={ this.handleChangeList }
+              value={ filterName }
+              disabled={ trunfoFilter }
+              data-testid="name-filter"
+              type="text"
+              id="filterName"
             />
-          ))}
+          </label>
+          { cardList
+            .filter((card) => card.cardName.includes(filterName))
+            .map((card) => (
+              <CardList
+                key={ card.cardName }
+                cardName={ card.cardName }
+                cardDescription={ card.cardDescription }
+                cardAttr1={ card.cardAttr1 }
+                cardAttr2={ card.cardAttr2 }
+                cardAttr3={ card.cardAttr3 }
+                cardImage={ card.cardImage }
+                cardRare={ card.cardRare }
+                cardTrunfo={ card.cardTrunfo }
+                onButtonDelete={ this.onButtonDelete }
+              />
+            ))}
         </section>
       </div>
     );
