@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import CardList from './components/CardList';
 
 class App extends React.Component {
   state = {
@@ -84,6 +85,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { cardList } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -95,6 +97,21 @@ class App extends React.Component {
         <Card
           { ...this.state }
         />
+        <section>
+          { cardList.map((card) => (
+            <CardList
+              key={ card.cardName }
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardAttr1={ card.cardAttr1 }
+              cardAttr2={ card.cardAttr2 }
+              cardAttr3={ card.cardAttr3 }
+              cardImage={ card.cardImage }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+            />
+          ))}
+        </section>
       </div>
     );
   }
