@@ -18,6 +18,20 @@ class App extends React.Component {
     cardList: [],
   };
 
+  onButtonDelete = (cardName) => {
+    const { cardList } = this.state;
+    const newCardList = cardList.filter((card) => card.cardName !== cardName);
+    this.setState({
+      cardList: newCardList,
+    });
+    if (cardList.some((card) => card.cardTrunfo)) {
+      this.setState({
+        hasTrunfo: false,
+        cardTrunfo: false,
+      });
+    }
+  };
+
   clearInput = () => {
     this.setState({
       cardName: '',
@@ -109,6 +123,7 @@ class App extends React.Component {
               cardImage={ card.cardImage }
               cardRare={ card.cardRare }
               cardTrunfo={ card.cardTrunfo }
+              onButtonDelete={ this.onButtonDelete }
             />
           ))}
         </section>
