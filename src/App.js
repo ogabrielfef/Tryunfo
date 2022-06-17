@@ -12,7 +12,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: 'normal',
     cardTrunfo: false,
-    // // hasTrunfo: 'false',
+    hasTrunfo: false,
     isSaveButtonDisabled: true,
     cardList: [],
   };

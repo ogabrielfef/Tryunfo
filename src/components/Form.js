@@ -6,7 +6,7 @@ class Form extends Component {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo,
       isSaveButtonDisabled, onInputChange,
-      onSaveButtonClick,
+      onSaveButtonClick, hasTrunfo,
     } = this.props;
     return (
       <form>
@@ -44,7 +44,6 @@ class Form extends Component {
             data-testid="attr1-input"
             value={ cardAttr1 }
             onChange={ onInputChange }
-            max="70"
           />
         </label>
         <br />
@@ -57,7 +56,6 @@ class Form extends Component {
             data-testid="attr2-input"
             value={ cardAttr2 }
             onChange={ onInputChange }
-            max="70"
           />
         </label>
         <br />
@@ -70,7 +68,6 @@ class Form extends Component {
             data-testid="attr3-input"
             value={ cardAttr3 }
             onChange={ onInputChange }
-            max="70"
           />
         </label>
         <br />
@@ -103,17 +100,22 @@ class Form extends Component {
           </select>
         </label>
         <br />
-        <label htmlFor="superTrunfo">
-          A carta é um Super Trunfo?
-          <input
-            type="checkbox"
-            id="superTrunfo"
-            name="cardTrunfo"
-            data-testid="trunfo-input"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-          />
-        </label>
+        {
+          !hasTrunfo
+            ? (<label htmlFor="superTrunfo">
+              A carta é um Super Trunfo?
+              <input
+                type="checkbox"
+                id="superTrunfo"
+                name="cardTrunfo"
+                data-testid="trunfo-input"
+                checked={ cardTrunfo }
+                onChange={ onInputChange }
+              />
+              </label>
+            )
+            : <p>Você já tem um Super Trunfo em seu baralho</p>
+        }
         <br />
         <button
           type="button"
