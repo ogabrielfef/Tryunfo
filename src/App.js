@@ -19,6 +19,7 @@ class App extends React.Component {
     filterName: '',
     trunfo: false,
     rareFilter: 'todas',
+    trunfoFilter: false,
   };
 
   onButtonDelete = (cardName) => {
@@ -76,8 +77,10 @@ class App extends React.Component {
   }
 
   handleChangeList = (event) => {
+    const value = event.target.type === 'checkbox'
+      ? event.target.checked : event.target.value;
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: value,
     }); console.log(event.target.value);
   }
 
@@ -140,6 +143,7 @@ class App extends React.Component {
               data-testid="rare-filter"
               value={ rareFilter }
               onChange={ this.handleChangeList }
+              disabled={ trunfoFilter }
             >
               <option value="todas">todas</option>
               <option value="normal">normal</option>
@@ -147,10 +151,23 @@ class App extends React.Component {
               <option value="muito raro">muito raro</option>
             </select>
           </label>
+          <label htmlFor="trunfo-filter">
+            Trunfo filter:
+            <input
+              type="checkbox"
+              id="trunfo-filter"
+              name="trunfoFilter"
+              data-testid="trunfo-filter"
+              checked={ trunfoFilter }
+              onChange={ this.handleChangeList }
+            />
+          </label>
           { cardList
             .filter((card) => (rareFilter === 'todas'
               ? cardList : rareFilter === card.cardRare))
             .filter((card) => card.cardName.includes(filterName))
+            .filter((card) => (trunfoFilter
+              ? card.cardTrunfo : cardList))
             .map((card) => (
               <CardList
                 key={ card.cardName }
