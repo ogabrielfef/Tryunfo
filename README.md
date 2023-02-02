@@ -3,6 +3,7 @@
 <p align="center">
 Projeto de manipulação de estado feito em React.
 <br/>
+<br/>
 Em caso de dicas, observações ou ajuda você pode entrar em contato comigo por qualquer um dos meios disponibilazados na minha bio. 🙂❤️
 </p>
 
