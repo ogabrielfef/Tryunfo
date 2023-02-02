@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import CardList from './components/CardList';
+import './App.css';
 
 class App extends React.Component {
   state = {
@@ -113,75 +114,83 @@ class App extends React.Component {
   render() {
     const { cardList, filterName, trunfoFilter, rareFilter } = this.state;
     return (
-      <div>
-        <h1>Tryunfo</h1>
-        <Form
-          { ...this.state }
-          onInputChange={ this.handleChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card
-          { ...this.state }
-        />
-        <section>
-          <label htmlFor="name-filter">
-            Filtro de Busca
-            <input
-              name="filterName"
-              onChange={ this.handleChangeList }
-              value={ filterName }
-              disabled={ trunfoFilter }
-              data-testid="name-filter"
-              type="text"
-              id="filterName"
-            />
-          </label>
-          <label htmlFor="rare-filter">
-            <select
-              id="rare-filter"
-              name="rareFilter"
-              data-testid="rare-filter"
-              value={ rareFilter }
-              onChange={ this.handleChangeList }
-              disabled={ trunfoFilter }
-            >
-              <option value="todas">todas</option>
-              <option value="normal">normal</option>
-              <option value="raro">raro</option>
-              <option value="muito raro">muito raro</option>
-            </select>
-          </label>
-          <label htmlFor="trunfo-filter">
-            Trunfo filter:
-            <input
-              type="checkbox"
-              id="trunfo-filter"
-              name="trunfoFilter"
-              data-testid="trunfo-filter"
-              checked={ trunfoFilter }
-              onChange={ this.handleChangeList }
-            />
-          </label>
-          { cardList
-            .filter((card) => (rareFilter === 'todas'
-              ? cardList : rareFilter === card.cardRare))
-            .filter((card) => card.cardName.includes(filterName))
-            .filter((card) => (trunfoFilter
-              ? card.cardTrunfo : cardList))
-            .map((card) => (
-              <CardList
-                key={ card.cardName }
-                cardName={ card.cardName }
-                cardDescription={ card.cardDescription }
-                cardAttr1={ card.cardAttr1 }
-                cardAttr2={ card.cardAttr2 }
-                cardAttr3={ card.cardAttr3 }
-                cardImage={ card.cardImage }
-                cardRare={ card.cardRare }
-                cardTrunfo={ card.cardTrunfo }
-                onButtonDelete={ this.onButtonDelete }
+      <div className="conteiner">
+        <div className="header">
+          <h1>Tryunfo</h1>
+        </div>
+        <div className="content-box">
+          <Form
+            { ...this.state }
+            onInputChange={ this.handleChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
+          <Card
+            { ...this.state }
+          />
+        </div>
+        <section className="filter">
+          <div className="filter-settings">
+            <label htmlFor="name-filter">
+              Filtro de Busca
+              <input
+                name="filterName"
+                onChange={ this.handleChangeList }
+                value={ filterName }
+                disabled={ trunfoFilter }
+                data-testid="name-filter"
+                type="text"
+                id="filterName"
               />
-            ))}
+            </label>
+            <label htmlFor="rare-filter">
+              <select
+                id="rare-filter"
+                name="rareFilter"
+                data-testid="rare-filter"
+                value={ rareFilter }
+                onChange={ this.handleChangeList }
+                disabled={ trunfoFilter }
+              >
+                <option value="todas">todas</option>
+                <option value="normal">normal</option>
+                <option value="raro">raro</option>
+                <option value="muito raro">muito raro</option>
+              </select>
+            </label>
+            <label htmlFor="trunfo-filter">
+              Trunfo filter:
+              <input
+                type="checkbox"
+                id="trunfo-filter"
+                name="trunfoFilter"
+                data-testid="trunfo-filter"
+                checked={ trunfoFilter }
+                onChange={ this.handleChangeList }
+              />
+            </label>
+          </div>
+          <div className="card-deck">
+            { cardList
+              .filter((card) => (rareFilter === 'todas'
+                ? cardList : rareFilter === card.cardRare))
+              .filter((card) => card.cardName.includes(filterName))
+              .filter((card) => (trunfoFilter
+                ? card.cardTrunfo : cardList))
+              .map((card) => (
+                <CardList
+                  key={ card.cardName }
+                  cardName={ card.cardName }
+                  cardDescription={ card.cardDescription }
+                  cardAttr1={ card.cardAttr1 }
+                  cardAttr2={ card.cardAttr2 }
+                  cardAttr3={ card.cardAttr3 }
+                  cardImage={ card.cardImage }
+                  cardRare={ card.cardRare }
+                  cardTrunfo={ card.cardTrunfo }
+                  onButtonDelete={ this.onButtonDelete }
+                />
+              ))}
+          </div>
         </section>
       </div>
     );

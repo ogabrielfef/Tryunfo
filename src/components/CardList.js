@@ -8,7 +8,7 @@ class CardList extends React.Component {
       cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, onButtonDelete } = this.props;
     return (
-      <div>
+      <div className="created-cart">
         <p data-testid="name-card">{cardName}</p>
         <img
           src={ cardImage }

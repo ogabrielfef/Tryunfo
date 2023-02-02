@@ -6,14 +6,14 @@ class Card extends React.Component {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo } = this.props;
     return (
-      <div>
+      <div className="card">
         <p data-testid="name-card">{ cardName }</p>
         <img
           src={ cardImage }
           alt={ cardName }
           data-testid="image-card"
-          width={ 70 }
-          height={ 70 }
+          width={ 100 }
+          height={ 100 }
         />
         <p data-testid="description-card">{cardDescription}</p>
         <p data-testid="attr1-card">{cardAttr1}</p>
